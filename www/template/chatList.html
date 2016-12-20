@@ -1,0 +1,82 @@
+
+  <p>
+    Sort by:
+    <select ng-model="orderBy">
+      <option>from</option>
+      <option>content</option>
+      <option>timestamp</option>
+    </select>
+  </p>
+
+  <p>Search: <input ng-model="searchText"></p>
+
+  <ul class="chatbox">
+    <!-- arrays are fully sortable and filterable -->
+    <li ng-repeat="message in messages | orderBy:orderBy | filter:searchText">
+       <a href="" ng-click="chat()">{{ message.from }}: {{ message.content }}</a>
+
+      <!-- delete a message using $remove -->
+      <a href="" ng-click="messages.$remove(message)">X</a>
+    </li>
+  </ul>
+
+
+
+<form ng-submit="addMessage()">
+    <input type="text" ng-model="message">
+    <input type="submit">
+  </form>
+<!--
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> 
+    
+    <title>Ionic Modal</title>
+
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+  </head>
+  <body ng-controller="AppCtrl">
+    
+    <ion-header-bar class="bar-positive">
+      <h1 class="title">Salon</h1>
+      <div class="buttons">
+        <button class="button button-icon ion-compose" ng-click="modal.show()">
+        </button>
+      </div>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-item ng-repeat="message in messages | orderBy:orderBy | filter:searchText">
+          {{ message.from }}:  {{ message.content }}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+    
+    <script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">New Contact</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">From</span>
+              <input ng-model="newSalon.from" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Name</span>
+              <input ng-model="newSalon.message" type="text">
+            </label>
+  
+                        <button class="button button-full button-positive" ng-click="addChatModalCtrl(newSalon)">Create</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    
+  </body>
+</html>
+ 
